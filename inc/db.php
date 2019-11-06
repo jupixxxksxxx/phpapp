@@ -5,7 +5,6 @@ function init_baza() {
 
 	$db = new PDO("sqlite:$dbfile");
 	$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
 }
 
 
@@ -15,10 +14,8 @@ function init_tables() {
 		$sql = file_get_contents(DBASE.'baza.sql', 'r');
 		$q = "SELECT name FROM sqlite_master WHERE type='table' AND name='menu'";
 		$ret = $db->query($q);
-		if (empty($ret)) {
-			$db->exec($sql);
-			$kom[] = "Utworzono tabele!";
-		}
+		//$db->exec($sql);
+		// $kom[] = "Utworzono tabele!";
 	}
 }
 
@@ -36,33 +33,5 @@ function db_query($q, &$ret) {
 	}
 	return false;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 ?>
