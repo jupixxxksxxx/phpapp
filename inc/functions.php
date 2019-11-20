@@ -37,7 +37,6 @@ function get_page_content($id) {
 	else
 		include('404.html');
 }
-
 function clrtxt(&$el, $maxdl=30) {
     if (is_array($el)) {
         return array_map('clrtxt', $el);
@@ -49,5 +48,10 @@ function clrtxt(&$el, $maxdl=30) {
         return $el;
     }
 }
-
+function get_koms() {
+	global $kom;
+	foreach ($kom as $k) {
+		echo "<p class=\"text-info\">$k</p>";
+	}
+}
 ?>

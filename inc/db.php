@@ -18,7 +18,7 @@ function init_tables() {
 		}
 	}
 }
-function db_query($q, &$ret) {
+function db_query($q, &$ret=null) {
 	global $db;
 	$r = null;
 	try {
@@ -26,10 +26,8 @@ function db_query($q, &$ret) {
 	} catch(PDOException $e) {
 		echo ($e->getMessage());
 	}
-	if ($r) {
-		$ret = $r->fetchAll(PDO::FETCH_ASSOC);
-		return true;
-	}
-	return false;
+	if ($r) $ret = $r->fetchAll(PDO::FETCH_ASSOC);
+	if (empty($ret)) return false;
+	return true;
 }
 ?>
