@@ -1,10 +1,38 @@
 <?php
-
 ini_set('session.save_path', 'sesje');
 
 class User {
+
 	var $dane = array();
 	var $keys = array('id', 'login', 'haslo', 'email', 'data');
+	var $CokieName = 'piejdzpiejpipi';
+	var $remTime = 7200;
+	car $kom = array();
+
+	function __construct(){
+		if (!isset($_SESSION)) session_start();
+		if (isset($_COOKIE[$this->CookieName]) && !$this->id) {
+			$c = unserialize(base64_decode($_COOKIE[$this->CookieName]));
+			$this->login($c['login'], $['haslo'], false, true);
+			$this->kom[] = "Hello there {$this->login}! U were logged in automatically!"
+		}
+	}
+
+	function login($login, $haslo, $rem=false, $load=true ) {
+		if ($load && $this->is_user($login, $haslo)) {
+			if ($rem) {
+				$c = base64_encode(serialize(array('login'=>$login, 'haslo'=>$haslo)));
+				$this->kom[] = $c;
+				$a = setcookie($this->CokieName, $c, time()+$this->remTime, '/', 'localhost', false, true);
+				if $a $this->kom[] = "Witaj przywoływaczu, zostałeś zalogowany";
+				return true;
+			}
+		} else {
+			$this->kom[] = 'Błędny login lub nie! Adam Słodowy umar ;(';
+			return false;
+		}
+	}
+
 	function is_user($sid, $login=NULL, $haslo=NULL) {
 		if (!empty($login)) {
 				$qstr='SELECT * FROM users WHERE login = \''.$login.'\' AND haslo = \''.sha1($haslo).'\' LIMIT 1';
