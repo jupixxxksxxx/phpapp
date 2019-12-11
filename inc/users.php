@@ -1,4 +1,7 @@
 <?php
+
+ini_set('session.save_path', 'sesje');
+
 class User {
 	var $dane = array();
 	var $keys = array('id', 'login', 'haslo', 'email', 'data');
