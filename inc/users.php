@@ -1,48 +1,49 @@
 <?php
 ini_set('session.save_path', 'sesje');
-
 class User {
-
 	var $dane = array();
 	var $keys = array('id', 'login', 'haslo', 'email', 'data');
-	var $CokieName = 'piejdzpiejpipi';
+	var $CookieName = 'phpapp';
 	var $remTime = 7200;
-	car $kom = array();
-
-	function __construct(){
+	var $kom = array();
+	function __construct() {
 		if (!isset($_SESSION)) session_start();
 		if (isset($_COOKIE[$this->CookieName]) && !$this->id) {
 			$c = unserialize(base64_decode($_COOKIE[$this->CookieName]));
-			$this->login($c['login'], $['haslo'], false, true);
-			$this->kom[] = "Hello there {$this->login}! U were logged in automatically!"
+			$this->login($c['login'], $c['haslo'], false, true);
+			$this->kom[] = "Hello there! U were zalogowaned automatiklich";
+		}
+		if (!$this->id && isset($_POST['login2'])) {
+			foreach ($_POST as $k => $v) {
+        ${$k} = clrtxt($v);
+    	}
+    	$this->login($login2, $haslo2, true, true);
 		}
 	}
-
 	function login($login, $haslo, $rem=false, $load=true ) {
 		if ($load && $this->is_user($login, $haslo)) {
 			if ($rem) {
 				$c = base64_encode(serialize(array('login'=>$login, 'haslo'=>$haslo)));
 				$this->kom[] = $c;
-				$a = setcookie($this->CokieName, $c, time()+$this->remTime, '/', 'localhost', false, true);
-				if $a $this->kom[] = "Witaj przywoływaczu, zostałeś zalogowany";
+				$a = setcookie($this->CookieName, $c, time()+$this->remTime, '/', 'localhost', false, true);
+				if ($a) $this->kom[] = 'Zapisano ciasteczko.';
+				$this->kom[] = "Witaj $login! Zostałeś zalogowany.";
 				return true;
 			}
 		} else {
-			$this->kom[] = 'Błędny login lub nie! Adam Słodowy umar ;(';
+			$this->kom[] = 'Błędny login lub hasło!';
 			return false;
 		}
 	}
-
-	function is_user($sid, $login=NULL, $haslo=NULL) {
+	function is_user($login=NULL, $haslo=NULL) {
 		if (!empty($login)) {
-				$qstr='SELECT * FROM users WHERE login = \''.$login.'\' AND haslo = \''.sha1($haslo).'\' LIMIT 1';
+				$q="SELECT * FROM users WHERE login='$login' AND haslo='".sha1($haslo)."' LIMIT 1";
 		} else return false;
-		$ret=array();
-		db_query($qstr,$ret);
-		if (!empty($ret[0])) {
-			$this->dane=array_merge($this->dane,$ret[0]);
+		Baza::db_query($q);
+		if (!empty(Baza::$ret[0])) {
+			$this->dane=array_merge($this->dane,Baza::$ret[0]);
 			$sid=sha1($this->id.$this->login.session_id());
-			$_SESSION[$this->uVal] = $sid; // zapis identyfikatora sesji
+			$_SESSION['sid'] = $sid; // zapis identyfikatora sesji
 			return true;
 		}
 		return false;
@@ -58,12 +59,12 @@ class User {
 	}
 	function is_login($login) {
 		$qstr='SELECT id FROM users WHERE login=\''.$login.'\' LIMIT 1';
-    if (db_query($qstr)) return true;
+    if (Baza::db_query($qstr)) return true;
     return false;
 	}
 	function is_email($email) {
 		$qstr='SELECT id FROM users WHERE email=\''.$email.'\' LIMIT 1';
-    if (db_query($qstr)) return true;
+    if (Baza::db_query($qstr)) return true;
     return false;
 	}
   function savtb() {//tab. asocjacyjna z kluczami: id#login#haslo#email#datad
@@ -71,10 +72,10 @@ class User {
 		$this->llog=time();
 		if (!$this->id) {
 			$qstr='INSERT INTO users VALUES (NULL,\''.$this->login.'\',\''.$this->haslo.'\',\''.$this->email.'\',time())';
-			$ret=db_exec($qstr);
-			$id = db_lastInsertID();
+			Baza::db_exec($qstr);
+			// $id = db_lastInsertID();
 		}
-		if ($ret) return true;
+		if (Baza::$ret) return true;
 		return false;
 	}
 }
