@@ -27,15 +27,27 @@ Baza::db_query('SELECT * FROM posty');
 echo '<h3>Wiadomości</h3>';
 echo '<ul>';
 foreach (Baza::$ret as $k => $t) {
-    global $strona;
+    global $strona, $user;
+    Baza::db_query('SELECT login FROM users WHERE id = '.$t['user']);
     echo '<li>';
-    echo $t['tresc'].' ('.$t['user'].', '.$t['data'].') ';
-    echo '<a href="?id='.$strona['id'].'&akcja=del&idw='.$t['id'].'">Usuń »»»</a>';
+        print_r(Baza::$ret);
+    echo $t['tresc'].' ('.Baza::$ret[0]['login'].', '.$t['data'].') ';
+
+    if ($t['user'] == $user->id) {
+        echo '<a href="?id='.$strona['id'].'&akcja=del&idw='.$t['id'].'">Usuń »»»</a>';
+        echo ' <a href="?id='.$strona['id'].'&akcja=edt&idw='.$t['id'].'">Edytuj »»»</a>';
+    }
     echo '</li>';
 }
 echo '</ul>';
-?>
 
+if (isset($_GET['akcja'])) {
+    ;  // obsługa edycji
+}
+
+global $user;
+if ($user->id) {
+?>
 <form action="?id=<?php echo $strona['id']; ?>" method="POST" name="dane" id="dane">
     <input type="hidden" name="id_user" value="10">
     <div class="form-group">
@@ -48,3 +60,6 @@ echo '</ul>';
     </div>
     <input type="submit" value="Wyślij" class="btn btn-primary">
 </form>
+<?php
+}
+?>

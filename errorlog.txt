@@ -11,3 +11,15 @@
 [13-Dec-2019 09:24:47 Europe/Warsaw] PHP Warning:  session_start(): Failed to read session data: files (path: sesje) in /home/kl2ag1/public_html/phpapp/inc/users.php on line 13
 [13-Dec-2019 09:30:38 Europe/Warsaw] PHP Warning:  session_start(): open(sesje/sess_qol9fr40pi617gpmuua951k5l8, O_RDWR) failed: Nie ma takiego pliku ani katalogu (2) in /home/kl2ag1/public_html/phpapp/inc/users.php on line 10
 [13-Dec-2019 09:30:38 Europe/Warsaw] PHP Warning:  session_start(): Failed to read session data: files (path: sesje) in /home/kl2ag1/public_html/phpapp/inc/users.php on line 10
+[10-Jan-2020 10:04:04 Europe/Warsaw] PHP Parse error:  syntax error, unexpected ':', expecting ',' or ')' in /home/kl2ag1/public_html/phpapp/wiadomości.html on line 32
+[10-Jan-2020 10:16:33 Europe/Warsaw] PHP Notice:  Undefined index: login in /home/kl2ag1/public_html/phpapp/wiadomości.html on line 33
+[10-Jan-2020 10:21:11 Europe/Warsaw] PHP Notice:  Undefined index: login in /home/kl2ag1/public_html/phpapp/wiadomości.html on line 33
+[10-Jan-2020 10:21:11 Europe/Warsaw] PHP Notice:  Undefined index: login in /home/kl2ag1/public_html/phpapp/wiadomości.html on line 33
+[10-Jan-2020 10:25:18 Europe/Warsaw] PHP Notice:  Undefined index: login in /home/kl2ag1/public_html/phpapp/wiadomości.html on line 33
+[10-Jan-2020 10:25:18 Europe/Warsaw] PHP Notice:  Undefined index: login in /home/kl2ag1/public_html/phpapp/wiadomości.html on line 33
+[10-Jan-2020 10:31:00 Europe/Warsaw] PHP Notice:  Undefined index: login in /home/kl2ag1/public_html/phpapp/wiadomości.html on line 33
+[10-Jan-2020 10:31:00 Europe/Warsaw] PHP Notice:  Undefined index: login in /home/kl2ag1/public_html/phpapp/wiadomości.html on line 33
+[10-Jan-2020 10:33:47 Europe/Warsaw] PHP Notice:  Undefined index: login in /home/kl2ag1/public_html/phpapp/wiadomości.html on line 34
+[10-Jan-2020 10:33:47 Europe/Warsaw] PHP Notice:  Undefined index: login in /home/kl2ag1/public_html/phpapp/wiadomości.html on line 34
+[10-Jan-2020 10:33:49 Europe/Warsaw] PHP Notice:  Undefined index: login in /home/kl2ag1/public_html/phpapp/wiadomości.html on line 34
+[10-Jan-2020 10:33:49 Europe/Warsaw] PHP Notice:  Undefined index: login in /home/kl2ag1/public_html/phpapp/wiadomości.html on line 34

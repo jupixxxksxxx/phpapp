@@ -11,7 +11,7 @@ class User {
 		if (isset($_COOKIE[$this->CookieName]) && !$this->id) {
 			$c = unserialize(base64_decode($_COOKIE[$this->CookieName]));
 			$this->login($c['login'], $c['haslo'], false, true);
-			$this->kom[] = "Hello there! U were zalogowaned automatiklich";
+			$this->kom[] = "Witaj {$this->login}! Zostałeś automatycznie zalogowany!";
 		}
 		if (!$this->id && isset($_POST['login2'])) {
 			foreach ($_POST as $k => $v) {
@@ -78,5 +78,16 @@ class User {
 		if (Baza::$ret) return true;
 		return false;
 	}
+	function logout($redirect='') {
+		setcookie($this->CookieName, '', time()-(5*$this->remTime), '/', 'localhost', false, true);
+		$this->dane = array();
+		$_SESSION = array();
+		if (session_destroy()) $this->kom[] = 'Zostałeś wylogowany';
+		if ($redirect != '' && !headers_sent()) {
+			header('Location: '.$redirect);
+			exit;
+		}
+	}
 }
+// github.com/lo1cgsan/phpapp
 ?>

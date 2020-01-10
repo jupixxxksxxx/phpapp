@@ -38,7 +38,7 @@
             if (isset($_COOKIE[$user->CookieName])) {
                 echo "<p>Ciasteczko: ".$_COOKIE[$user->CookieName]."</p>";
             } else {
-                echo "<p>Brak cisteczka.</p>";
+                echo "<p>Ciasteczko Istniejen't</p>";
             }
         ?>
         </div>

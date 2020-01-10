@@ -8,7 +8,12 @@ if (isset($_POST['login'])) {
     print_r($_SESSION);
 }
 ?> -->
+<?php
 
+    global $user;
+    if (!$user->id) {
+
+?>
 <form action="?id=<?php echo $strona['id']; ?>" method="POST" name="dane" id="dane">
     <input type="hidden" name="id_user" value="10">
     <div class="form-group">
@@ -23,3 +28,8 @@ if (isset($_POST['login'])) {
     </div>
     <input type="submit" value="Wyślij" class="btn btn-primary">
 </form>
+<?php
+
+}
+
+?>
